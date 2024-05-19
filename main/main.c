@@ -82,6 +82,5 @@ void app_main(void)
             *(lcd_buffer+128*i+j) = get_pixel_color(i,j);
         }
     }
-    //test
     print_screen_to_lcd(lcd, lcd_buffer);
 }
