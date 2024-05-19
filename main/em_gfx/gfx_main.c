@@ -1,6 +1,6 @@
 #include "gfx_main.h"
 
-pixel *screen;
+uint16_t *screen;
 int screen_w;
 int screen_l;
 int **buffer;
@@ -8,9 +8,8 @@ int **buffer;
 void set_pixel(int x, int y, color color, int layer)
 {   
     if(x<0 || x>=screen_l || y<0 || y>=screen_w ) return;
-    // if((screen+(screen_l * y + x))->layer < layer) return;
-    (screen+(screen_l * y + x))->color.rgb = color.rgb;
-    (screen+(screen_l * y + x))->layer = layer;
+    *(screen+(screen_l * y + x)) = color.rgb;
+    // (screen+(screen_l * y + x))->layer = layer;
 }
 
 gfx_object_node active_objects_head = {
@@ -68,19 +67,13 @@ void refresh_screen(){
     int i=0;
     gfx_object_node *current = active_objects_head.next;
     while(current->object != NULL){
-        // if(!current->object->animate){
-            current->object->obj_constructor(current->object, i);
-        // }
-        current = current->next;
+        current->object->obj_constructor(current->object, i);
         i++;
+        current = current->next;
     }
 }
 
-uint16_t get_pixel_color(int y, int x){
-    return (screen+screen_l*y+x)->color.rgb;
-}
-
-void init_emgfx(int length, int width, pixel *buf){
+void init_emgfx(int length, int width, uint16_t *buf){
     screen_l = length;
     screen_w = width;
     screen = buf;

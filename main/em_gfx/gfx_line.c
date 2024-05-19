@@ -1,7 +1,17 @@
 #include "gfx_line.h"
 #include <stdbool.h>
 
-void get_line(coords p1, coords p2, coords *points, int size){
+void draw_line(gfx_object *object, int layer){
+    gfx_line *line = (gfx_line*) object;
+    
+    coords p1 = {
+        .x = line->endpoint[0].x + object->anchor.x,
+        .y = line->endpoint[0].y + object->anchor.y
+    };
+    coords p2 = {
+        p2.x = line->endpoint[1].x + object->anchor.x,
+        p2.y = line->endpoint[1].y + object->anchor.y
+    };
     bool reverse = false;
     if(p2.x < p1.x){
         reverse = true;
@@ -18,14 +28,8 @@ void get_line(coords p1, coords p2, coords *points, int size){
     
     if(dy <= dx){
         int D = 2*dy - dx;
-        for(int i=0; i<size; i++){
-            if(!reverse){
-                points[i].x = x;
-                points[i].y = y;
-            } else {
-                points[size-i-1].x = x;
-                points[size-i-1].y = y;
-            }
+        for(int i=0; i<dx; i++){
+            set_pixel(x,y,object->color,layer);
             if(D <= 0){
                 D = D + 2*dy;
             } else {
@@ -36,14 +40,8 @@ void get_line(coords p1, coords p2, coords *points, int size){
         }
     } else {
         int D = 2*dx - dy;
-        for(int i=0; i<size; i++){
-            if(!reverse){
-                points[i].x = x;
-                points[i].y = y;
-            } else {
-                points[size-1-i].x = x;
-                points[size-1-i].y = y;
-            }
+        for(int i=0; i<dy; i++){
+            set_pixel(x,y,object->color,layer);
             if(D <= 0){
                 D = D + 2*dx;
             } else {
@@ -55,34 +53,6 @@ void get_line(coords p1, coords p2, coords *points, int size){
     }
 }
 
-static int count_points_line(coords p1, coords p2){
-    int dx = abs(p2.x-p1.x);
-    int dy = abs(p2.y-p1.y);
-    int ret = (dx>=dy)?dx+1:dy+1;
-    return ret;
-}
-
-void draw_line(gfx_object *object, int layer){
-    gfx_line *line = (gfx_line*) object;
-    
-    coords p1 = {
-        .x = line->endpoint[0].x + object->anchor.x,
-        .y = line->endpoint[0].y + object->anchor.y
-    };
-    coords p2 = {
-        p2.x = line->endpoint[1].x + object->anchor.x,
-        p2.y = line->endpoint[1].y + object->anchor.y
-    };
-    
-    int number_of_points =  count_points_line(p1, p2);
-    coords line_points[number_of_points];
-    get_line(p1,p2, line_points, number_of_points);
-
-    for(int i=0; i<number_of_points; i++){
-        set_pixel(line_points[i].x,line_points[i].y, object->color, layer);
-    }
-}
-
 gfx_object *create_line(coords p1, coords p2, char *name){
     gfx_line *line = malloc(sizeof(gfx_line)); //free this while deleting line
     
@@ -91,6 +61,7 @@ gfx_object *create_line(coords p1, coords p2, char *name){
     line->endpoint[1] = (coords){.x = p2.x - p1.x, .y = p2.y - p1.y};
     line->common.obj_constructor = draw_line;
     line->common.animate = 0;
+    line->common.isPath = 0;
     line->common.name = name;
     line->common.color.rgb = 0b1111111111111111;
     activate_object((gfx_object*)line);

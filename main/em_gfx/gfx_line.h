@@ -9,8 +9,6 @@ typedef struct gfx_object_line {
     coords endpoint[2];
 }gfx_line;
 
-void get_line(coords p1, coords p2, coords *points, int size);
-
 void draw_line(gfx_object *object, int layer);
 
 gfx_object *create_line(coords p1, coords p2, char *name);

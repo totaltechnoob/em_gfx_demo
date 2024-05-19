@@ -13,6 +13,7 @@ gfx_object *create_background(color bg_color, char *name){
     ret->common.animate = 0;
     ret->common.name = name;
     ret->common.color = bg_color;
+    ret->common.isPath = 0;
     ret->common.obj_constructor = draw_background;
     activate_object((gfx_object*)ret);
     return (gfx_object*) ret;

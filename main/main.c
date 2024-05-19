@@ -45,8 +45,7 @@ static char *TAG = "MAIN";
 
 void app_main(void)
 {   
-    pixel *gfx_buffer = malloc(sizeof(pixel) *  SCREEN_L * SCREEN_W);
-    uint16_t *lcd_buffer = malloc(sizeof(uint16_t) * SCREEN_L * SCREEN_W);
+    uint16_t *buffer = malloc(sizeof(uint16_t) *  SCREEN_L * SCREEN_W);
     spi_device_handle_t lcd;
     spi_bus_config_t buscfg={
         .miso_io_num=PIN_NUM_MISO,
@@ -67,7 +66,7 @@ void app_main(void)
     spi_bus_add_device(HSPI_HOST, &devcfg, &lcd);
 
     lcd_init(lcd, PIN_NUM_DC, PIN_NUM_CS, PIN_NUM_RST, PIN_NUM_BCKL, PARALLEL_LINES, SCREEN_L, SCREEN_W);
-    init_emgfx(SCREEN_L, SCREEN_W, gfx_buffer);
+    init_emgfx(SCREEN_L, SCREEN_W, buffer);
 
     color bgcolor = {
         .rgb = 0b1010101010101010
@@ -77,11 +76,6 @@ void app_main(void)
     gfx_object *line1 = create_line((coords){3,4},(coords){20,45},"line1");
     line1->color.rgb = 0b0011001111001101;
     refresh_screen();
-    for(int i=0; i<SCREEN_W; i++){
-        for(int j=0; j<SCREEN_L; j++){
-            *(lcd_buffer+128*i+j) = get_pixel_color(i,j);
-        }
-    }
     //test
-    print_screen_to_lcd(lcd, lcd_buffer);
+    print_screen_to_lcd(lcd, buffer);
 }

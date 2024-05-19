@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "esp_log.h"
 
 typedef union{
     struct{
@@ -55,9 +56,7 @@ void delete_object(gfx_object *obj);
 
 void refresh_screen();
 
-uint16_t get_pixel_color(int y, int x);
-
-void init_emgfx(int, int, pixel*);
+void init_emgfx(int, int, uint16_t*);
 
 void clear_screen();
 
