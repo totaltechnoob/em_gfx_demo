@@ -1,7 +1,7 @@
 {
     "version":            "1",
     "project_name":       "em_gfx_demo",
-    "project_version":    "8dcf096-dirty",
+    "project_version":    "b44d356-dirty",
     "project_path":       "D:/Projects/Coding/ESP32/em_gfx_demo",
     "idf_path":           "C:/Users/Yash/esp/esp-idf",
     "build_dir":          "D:/Projects/Coding/ESP32/em_gfx_demo/build",

@@ -73,9 +73,8 @@ void app_main(void)
     };
 
     gfx_object *bg = create_background(bgcolor, "bg");
-    gfx_object *line1 = create_line((coords){3,4},(coords){20,45},"line1");
-    line1->color.rgb = 0b0011001111001101;
+    gfx_object *line1 = create_line((coords){1,1},(coords){127,127},"line1");
     refresh_screen();
-    //test
     print_screen_to_lcd(lcd, buffer);
+    
 }

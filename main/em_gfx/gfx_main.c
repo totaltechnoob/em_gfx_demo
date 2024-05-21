@@ -1,15 +1,13 @@
 #include "gfx_main.h"
 
-uint16_t *screen;
+static uint16_t *screen;
 int screen_w;
 int screen_l;
-int **buffer;
 
 void set_pixel(int x, int y, color color, int layer)
 {   
     if(x<0 || x>=screen_l || y<0 || y>=screen_w ) return;
     *(screen+(screen_l * y + x)) = color.rgb;
-    // (screen+(screen_l * y + x))->layer = layer;
 }
 
 gfx_object_node active_objects_head = {
@@ -60,7 +58,6 @@ void delete_object(gfx_object *obj){ //delete the object as well as the node ref
     current->next->previous = current->previous;
     free(current);
     free(obj);
-    refresh_screen();
 }
 
 void refresh_screen(){

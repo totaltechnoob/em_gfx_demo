@@ -12,7 +12,7 @@ int parallel_lines;
 int screen_width;
 int screen_length;
 
-uint16_t *screen_array;
+static uint16_t *screen_array;
 
 
 DRAM_ATTR static const lcd_init_cmd_t ili_init_cmds[]={
