@@ -46,6 +46,7 @@ static char *TAG = "MAIN";
 void app_main(void)
 {   
     uint16_t *buffer = malloc(sizeof(uint16_t) *  SCREEN_L * SCREEN_W);
+    
     spi_device_handle_t lcd;
     spi_bus_config_t buscfg={
         .miso_io_num=PIN_NUM_MISO,

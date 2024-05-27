@@ -45,5 +45,7 @@
         "cdefs.h": "c"
     },
     "idf.flashType": "UART",
-    "output.smartScroll.enabled": false
+    "output.smartScroll.enabled": false,
+    "idf.monitorBaudRate": "115200",
+    "idf.flashBaudRate": "115200"
 }

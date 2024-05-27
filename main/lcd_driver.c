@@ -14,7 +14,6 @@ int screen_length;
 
 static uint16_t *screen_array;
 
-
 DRAM_ATTR static const lcd_init_cmd_t ili_init_cmds[]={
     /* Power control 1, GVDD=4.75V */
     {0xC0, {0x26}, 1},
@@ -219,4 +218,3 @@ void print_screen_to_lcd(spi_device_handle_t spi, uint16_t *buffer)
     heap_caps_free(lines[sending_line]);
     heap_caps_free(lines[calc_line]);
 }
-

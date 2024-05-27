@@ -16,4 +16,3 @@ typedef struct gfx_animation{
 }gfx_animation_t;
 
 #endif //GFX_ANIMATE_H
-
