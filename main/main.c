@@ -75,59 +75,38 @@ void app_main(void)
     };
 
     gfx_object *bg = create_background(bgcolor, "bg");
-    // gfx_object *line1 = create_line((coords){1,1},(coords){127,127},"line1");
-    // gfx_object *line2 = create_line((coords){87,54}, (coords){22,125}, "line2");
+    gfx_object *line1 = create_line((coords){1,1},(coords){127,127},"line1");
+    gfx_object *line2 = create_line((coords){87,54}, (coords){22,125}, "line2");
     
-    // gfx_init_animations();
+    gfx_init_animations();
 
-    // gfx_animation_t line1_move = {
-    //     .animation_cb = gfx_set_x,
-    //     .duration = 500,
-    //     .object = line1,
-    //     .start_value = line1->anchor.x,
-    //     .end_value = line1_move.start_value + 50,
-    //     .start_time = get_current_time(),
-    //     .time_elapsed = 0
-    // };
+    gfx_animation_t line1_move = {
+        .animation_cb = gfx_set_x,
+        .duration = 500,
+        .object = line1,
+        .start_value = line1->anchor.x,
+        .end_value = line1_move.start_value + 50,
+        .start_time = get_current_time(),
+        .time_elapsed = 0
+    };
     
-    // gfx_animation_t line2_move = {
-    //     .animation_cb = gfx_set_x,
-    //     .duration = 700,
-    //     .object = line2,
-    //     .start_value = line2->anchor.x,
-    //     .end_value = line2_move.start_value - 30,
-    //     .start_time = get_current_time(),
-    //     .time_elapsed = 0
-    // };
+    gfx_animation_t line2_move = {
+        .animation_cb = gfx_set_x,
+        .duration = 700,
+        .object = line2,
+        .start_value = line2->anchor.x,
+        .end_value = line2_move.start_value - 30,
+        .start_time = get_current_time(),
+        .time_elapsed = 0
+    };
 
-    // gfx_animation_t bg_color = {
-    //     .animation_cb = gfx_set_color_red,
-    //     .duration = 2000,
-    //     .object = bg,
-    //     .start_value = bg->color.r,
-    //     .end_value = 0b0000000000011111,
-    //     .start_time = get_current_time(),
-    //     .time_elapsed = 0
-    // };
-
-    // ESP_LOGI(TAG, "Start Color is %i", bg_color.start_value);
-
-
-    // gfx_activate_animation(&line1_move);
-    // gfx_activate_animation(&line2_move);
-    // gfx_activate_animation(&bg_color);
+    gfx_activate_animation(&line1_move);
+    gfx_activate_animation(&line2_move);
     
-    while(1){
-            gfx_set_color(bg, 7);
-            gfx_render_frame();
-            print_screen_to_lcd(lcd, buffer);
-            vTaskDelay(1000/portTICK_PERIOD_MS);
-            gfx_set_color(bg, 8);
-            gfx_render_frame();
-            print_screen_to_lcd(lcd, buffer);
-            vTaskDelay(1000/portTICK_PERIOD_MS);
-            
-        // increment_time(5);
-        // execute_timed_tasks();
+    while(1){            
+        increment_time(10);
+        execute_timed_tasks();
+        print_screen_to_lcd(lcd, buffer);
+        vTaskDelay(10/portTICK_PERIOD_MS);
     }
 }
