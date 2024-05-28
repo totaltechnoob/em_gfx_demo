@@ -1,7 +1,7 @@
 {
     "version":            "1",
     "project_name":       "em_gfx_demo",
-    "project_version":    "0df698b-dirty",
+    "project_version":    "4c63b5c-dirty",
     "project_path":       "D:/Projects/Coding/ESP32/em_gfx_demo",
     "idf_path":           "C:/Users/Yash/esp/esp-idf",
     "build_dir":          "D:/Projects/Coding/ESP32/em_gfx_demo/build",
@@ -790,7 +790,7 @@
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "file": "D:/Projects/Coding/ESP32/em_gfx_demo/build/esp-idf/main/libmain.a",
-            "sources": [ "D:/Projects/Coding/ESP32/em_gfx_demo/main/main.c", "D:/Projects/Coding/ESP32/em_gfx_demo/main/em_gfx/gfx_animate.c", "D:/Projects/Coding/ESP32/em_gfx_demo/main/em_gfx/gfx_main.c", "D:/Projects/Coding/ESP32/em_gfx_demo/main/em_gfx/gfx_background.c", "D:/Projects/Coding/ESP32/em_gfx_demo/main/em_gfx/gfx_line.c", "D:/Projects/Coding/ESP32/em_gfx_demo/main/lcd_driver.c" ],
+            "sources": [ "D:/Projects/Coding/ESP32/em_gfx_demo/main/main.c", "D:/Projects/Coding/ESP32/em_gfx_demo/main/em_gfx/gfx_animate.c", "D:/Projects/Coding/ESP32/em_gfx_demo/main/em_gfx/gfx_main.c", "D:/Projects/Coding/ESP32/em_gfx_demo/main/em_gfx/gfx_background.c", "D:/Projects/Coding/ESP32/em_gfx_demo/main/em_gfx/gfx_line.c", "D:/Projects/Coding/ESP32/em_gfx_demo/main/em_gfx/gfx_timer.c", "D:/Projects/Coding/ESP32/em_gfx_demo/main/lcd_driver.c" ],
             "include_dirs": [ "." ]
         },
         "mbedtls": {

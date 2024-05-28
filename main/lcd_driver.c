@@ -25,6 +25,8 @@ DRAM_ATTR static const lcd_init_cmd_t ili_init_cmds[]={
     {0xC7, {0xBE}, 1},
     /* Memory access contorl, MX=MY=0, MV=1, ML=0, BGR=1, MH=0 */
     {0x36, {0x28}, 1},
+    /* Idle Mode Off*/
+    {0x38, {0}, 0},
     /* Pixel format, 16bits/pixel for RGB/MCU interface */
     {0x3A, {0x55}, 1},
     /* Frame rate control, f=fosc, 70Hz fps */
@@ -184,7 +186,7 @@ static void send_lines(spi_device_handle_t spi, int ypos, uint16_t *linedata)
     trans[3].tx_data[3]=(ypos+parallel_lines)&0xff;  //end page low
     trans[4].tx_data[0]=0x2C;           //memory write
     trans[5].tx_buffer=linedata;        //finally send the line data
-    trans[5].length=128*2*8*parallel_lines;          //Data length, in bits
+    trans[5].length=screen_length*2*8*parallel_lines;          //Data length, in bits
     trans[5].flags=0; //undo SPI_TRANS_USE_TXDATA flag
 
     for (x=0; x<6; x++) {
@@ -196,7 +198,7 @@ void print_screen_to_lcd(spi_device_handle_t spi, uint16_t *buffer)
 {
     for(int i=0; i<screen_width; i++){
         for(int j=0; j<screen_length; j++){
-            *(screen_array+128*i+j) = *(buffer+128*i+j);
+            *(screen_array+screen_length*i+j) = *(buffer+128*i+j);
         }
     }
     uint16_t *lines[2];

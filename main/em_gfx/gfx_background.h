@@ -13,4 +13,6 @@ void draw_background(gfx_object *bg, int layer);
 
 gfx_object *create_background(color bg_color, char *name);
 
+void gfx_set_color(gfx_object *obj, int value);
+
 #endif //GFX_BACKGROUND_H

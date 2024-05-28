@@ -13,4 +13,6 @@ void draw_line(gfx_object *object, int layer);
 
 gfx_object *create_line(coords p1, coords p2, char *name);
 
+void gfx_set_x(gfx_object *obj, int x);
+
 #endif //GFX_LINE_H

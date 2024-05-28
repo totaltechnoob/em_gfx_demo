@@ -1,15 +1,18 @@
 #ifndef GFX_MAIN_H
-   #define GFX_MAIN_H
+#define GFX_MAIN_H
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
+#ifndef GFX_TIMER_H
+    #include "gfx_timer.h"
+#endif
 #include "esp_log.h"
 
 typedef union{
     struct{
-        unsigned short b : 5;
-        unsigned short g : 6;
-        unsigned short r : 5;
+        uint16_t g : 5;
+        uint16_t r : 6;
+        uint16_t b : 5;
     };
     uint16_t rgb;
 }color;
@@ -39,7 +42,7 @@ typedef struct gfx_object{
     };
 }gfx_object;
 
-void activate_object(gfx_object *);
+void gfx_activate_object(gfx_object *);
 
 typedef struct node{
     //Flag: Needs refresh
@@ -50,14 +53,14 @@ typedef struct node{
 
 void set_pixel(int x, int y, color color, int layer);
 
-void list_active_objects();
+void gfx_list_active_objects();
 
-void delete_object(gfx_object *obj);
+void gfx_delete_object(gfx_object *obj);
 
-void refresh_screen();
+void gfx_render_frame();
 
-void init_emgfx(int, int, uint16_t*);
+void gfx_initlib(int, int, uint16_t*);
 
-void clear_screen();
+void gfx_clear_screen();
 
 #endif //GFX_MAIN_H

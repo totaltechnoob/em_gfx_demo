@@ -64,6 +64,10 @@ gfx_object *create_line(coords p1, coords p2, char *name){
     line->common.isPath = 0;
     line->common.name = name;
     line->common.color.rgb = 0b1111111111111111;
-    activate_object((gfx_object*)line);
+    gfx_activate_object((gfx_object*)line);
     return (gfx_object*) line;
+}
+
+void gfx_set_x(gfx_object *obj, int x){
+    obj->anchor.x = x;
 }

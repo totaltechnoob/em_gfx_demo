@@ -22,7 +22,7 @@ gfx_object_node active_objects_tail = {
     .previous = NULL
 };
 
-void activate_object(gfx_object *obj){
+void gfx_activate_object(gfx_object *obj){
     gfx_object_node *current_node;
     gfx_object_node *new_node = malloc(sizeof(gfx_object_node)); //free this while deleting object
     new_node->object = obj;
@@ -38,7 +38,7 @@ void activate_object(gfx_object *obj){
     active_objects_tail.previous = new_node;
 }
 
-void list_active_objects(){
+void gfx_list_active_objects(){
     gfx_object_node *current_node;
     current_node = active_objects_head.next;
     int i = 1;
@@ -48,7 +48,7 @@ void list_active_objects(){
     }
 }
 
-void delete_object(gfx_object *obj){ //delete the object as well as the node referring to it
+void gfx_delete_object(gfx_object *obj){ //delete the object as well as the node referring to it
     gfx_object_node *current;
     current = &active_objects_head;
     while(current->object != obj){
@@ -60,7 +60,7 @@ void delete_object(gfx_object *obj){ //delete the object as well as the node ref
     free(obj);
 }
 
-void refresh_screen(){
+void gfx_render_frame(){
     int i=0;
     gfx_object_node *current = active_objects_head.next;
     while(current->object != NULL){
@@ -70,15 +70,16 @@ void refresh_screen(){
     }
 }
 
-void init_emgfx(int length, int width, uint16_t *buf){
+void gfx_initlib(int length, int width, uint16_t *buf){
     screen_l = length;
     screen_w = width;
     screen = buf;
     active_objects_head.next = &active_objects_tail;
     active_objects_tail.previous = &active_objects_head;
+    register_function_to_timer(gfx_render_frame);
 }
 
-void clear_screen(){
+void gfx_clear_screen(){
     color black;
     black.rgb = 0b0000000000000000;
     for(int i=0; i<screen_w; i++){
